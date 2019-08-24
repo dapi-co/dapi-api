@@ -1,0 +1,22 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "entry point",
+  "scripts": {
+    "dev": "node node_modules/moleculer/bin/moleculer-runner --hot services"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dapi-co/api.git"
+  },
+  "author": "Amr Essam",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dapi-co/api/issues"
+  },
+  "homepage": "https://github.com/dapi-co/api#readme",
+  "dependencies": {
+    "moleculer": "^0.14.0-beta3",
+    "moleculer-web": "^0.9.0-beta6"
+  }
+}
