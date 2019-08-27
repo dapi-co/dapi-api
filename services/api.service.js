@@ -23,7 +23,7 @@ module.exports = {
   },
 
   methods: {
-    async authorize(req) {
+    async authorize(ctx, route, req, res) {
       let token = req.headers["authorization"];
       if (token && token.startsWith("Bearer"))
         token = token.slice(7);
