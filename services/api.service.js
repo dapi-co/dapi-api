@@ -1,5 +1,5 @@
 const APIGateway = require('moleculer-web')
-const { UnAuthorizedError, ERR_INVALID_TOKEN } = require('moleculer-web').Errors
+
 module.exports = {
   name: 'api',
   mixins: [APIGateway],
@@ -7,25 +7,32 @@ module.exports = {
     port: process.env.PORT || 3000,
     routes: [
       {
-        path: '/v1',
-        authentication: true,
-        aliases: {},
-        // mappingPolicy: 'restrict',
+        path: 'api/v1',
+        aliases: {
+          'auth/(.*)': 'auth.HandleRequest',
+          'clients/(.*)': 'clients.HandleRequest',
+          'users/(.*)': 'users.HandleRequest',
+        },
         bodyParsers: {
           json: { strict: false },
           urlencoded: { extended: false },
         },
+        authorization: true,
       },
     ],
   },
+
   methods: {
-    authenticate(ctx, route, req, res) {
-      console.log('Authenticating...')
-      // const auth = await this.broker.call('auth.init', ctx, route, req, res) //example
-      //   if(auth)
-      //     return Promise.resolve()
-      //   else
-      return Promise.reject(new UnAuthorizedError(ERR_INVALID_TOKEN))
-    },
-  },
+    async authorize(req) {
+      let token = req.headers["authorization"];
+      if (token && token.startsWith("Bearer"))
+        token = token.slice(7);
+
+      //Add endpoint and bearer token to params
+      req.$params.endpoint = req.$params['0'];
+      req.$params.jwt = token;
+      delete req.$params['0'];
+      return Promise.resolve('Authorized');
+    }
+  }
 }
