@@ -12,6 +12,8 @@ module.exports = {
           'auth(.*)': 'auth.HandleRequest',
           'clients(.*)': 'clients.HandleRequest',
           'users(.*)': 'users.HandleRequest',
+          'data/(.*)': 'users.HandleDataRequest',
+          'payment/(.*)': 'users.HandlePaymentRequest',
         },
         bodyParsers: {
           json: { strict: false },
