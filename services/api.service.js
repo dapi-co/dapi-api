@@ -8,7 +8,7 @@ module.exports = {
     cors: true,
     routes: [
       {
-        path: 'api/v1',
+        path: '/v1',
         aliases: {
           'auth/(.*)': 'auth.HandleRequest',
           'clients/(.*)': 'clients.HandleRequest',
