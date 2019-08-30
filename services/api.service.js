@@ -9,9 +9,9 @@ module.exports = {
       {
         path: 'api/v1',
         aliases: {
-          'auth(.*)': 'auth.HandleRequest',
-          'clients(.*)': 'clients.HandleRequest',
-          'users(.*)': 'users.HandleRequest',
+          'auth/(.*)': 'auth.HandleRequest',
+          'clients/(.*)': 'clients.HandleRequest',
+          'users/(.*)': 'users.HandleRequest',
           'data/(.*)': 'users.HandleDataRequest',
           'payment/(.*)': 'users.HandlePaymentRequest',
         },
