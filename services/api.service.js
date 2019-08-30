@@ -5,6 +5,7 @@ module.exports = {
   mixins: [APIGateway],
   settings: {
     port: process.env.PORT || 3000,
+    cors: true,
     routes: [
       {
         path: 'api/v1',
