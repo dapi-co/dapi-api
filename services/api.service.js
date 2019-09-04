@@ -13,13 +13,17 @@ module.exports = {
   settings: {
     https: https,
     port: process.env.PORT || 443,
-    cors: true,
+    cors: {
+      origin: '*',
+      methods: ['GET', 'POST']
+    },
     routes: [
       {
         path: '/v1',
         aliases: {
           'auth(.*)': 'auth.HandleRequest',
           'clients(.*)': 'clients.HandleRequest',
+          'jobs/GetJobStatus': 'clients.HandleRequest',
           'users(.*)': 'users.HandleRequest',
           'data/(.*)': 'users.HandleDataRequest',
           'payment/(.*)': 'users.HandlePaymentRequest',
@@ -30,7 +34,30 @@ module.exports = {
         },
         authorization: true,
       },
+      {
+        path: '',
+        aliases: {
+          '': 'api.Root',
+          '/': 'api.Root'
+        },
+        bodyParsers: {
+          json: { strict: false },
+          urlencoded: { extended: false },
+        },
+        authorization: true,
+      },
     ],
+  },
+
+  actions: {
+    Root: {
+      handler() {
+        return {
+          name: 'Dapi Sandbox',
+          apiVersion: 'v1'
+        }
+      }
+    }
   },
 
   methods: {
@@ -39,10 +66,9 @@ module.exports = {
       if (token && token.startsWith("Bearer"))
         token = token.slice(7);
 
-      //Add endpoint and bearer token to params
-      req.$params.endpoint = req.$params['0'];
       req.$params.jwt = token;
-      delete req.$params['0'];
+      req.$params.remoteAddress = req.connection.remoteAddress;
+      req.$params.endpoint = req.parsedUrl.split('/')[3];
       return Promise.resolve('Authorized');
     }
   }
