@@ -1,10 +1,18 @@
 const APIGateway = require('moleculer-web')
+const fs = require('fs')
+
+const https = process.env.NODE_ENV === 'production' ? {
+  key: fs.readFileSync('/etc/letsencrypt/live/sandbox.dapi.co/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/sandbox.dapi.co/cert.pem'),
+  ca: fs.readFileSync('/etc/letsencrypt/live/sandbox.dapi.co/chain.pem')
+} : {}
 
 module.exports = {
   name: 'api',
   mixins: [APIGateway],
   settings: {
-    port: process.env.PORT || 3000,
+    https: https,
+    port: process.env.PORT || 443,
     cors: true,
     routes: [
       {
