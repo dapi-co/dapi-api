@@ -53,8 +53,8 @@ module.exports = {
       {
         path: '',
         aliases: {
-          '': 'api.Root',
-          '/': 'api.Root'
+          '': 'api-unsecure.Root',
+          '/': 'api-unsecure.Root'
         },
         bodyParsers: {
           json: { strict: false },
