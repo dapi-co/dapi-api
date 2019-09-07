@@ -37,9 +37,8 @@ module.exports = {
             res.writeHead(302, {
               Location: 'https://' + req.headers.host + req.originalUrl,
             })
-            res.end()
+            return res.end()
           } else {
-            res.setHeader('Content-type', 'application/json; charset=utf-8')
             res.writeHead(505)
             return res.end(
               JSON.stringify(
@@ -74,9 +73,8 @@ module.exports = {
             res.writeHead(302, {
               Location: 'https://' + req.headers.host + req.originalUrl,
             })
-            res.end()
+            return res.end()
           } else {
-            res.setHeader('Content-type', 'application/json; charset=utf-8')
             res.writeHead(505)
             return res.end(
               JSON.stringify(
