@@ -38,7 +38,7 @@ module.exports = {
             ctx.meta.$location = 'https://' + req.headers.host + req.originalUrl
           } else {
             ctx.meta.$statusCode = 403
-            return Promise.reject({
+            return Promise.resolve({
               success: false,
               msg: 'Please use HTTPS when communicating with this server',
             })
