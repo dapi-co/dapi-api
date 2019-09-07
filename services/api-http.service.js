@@ -60,12 +60,13 @@ module.exports = {
       {
         path: '',
         onBeforeCall(ctx, route, req, res) {
-          if (req.method === 'GET')
+          if (req.method === 'GET') {
+            console.log(res)
             return res.redirect(
               301,
               'https://' + req.headers.host + req.originalUrl,
             )
-          else
+          } else
             return res
               .status(403)
               .send('Please use HTTPS when communicating with this server')
