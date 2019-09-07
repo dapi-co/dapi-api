@@ -33,15 +33,14 @@ module.exports = {
       {
         path: '/v1',
         onBeforeCall(ctx, route, req, res) {
-          if (req.method === 'GET')
-            return res.redirect(
-              301,
-              'https://' + req.headers.host + req.originalUrl,
-            )
-          else
-            return res
-              .status(403)
-              .send('Please use HTTPS when communicating with this server')
+          if (req.method === 'GET') {
+            ctx.meta.$statusCode = 302
+            ctx.meta.$location = 'https://' + req.headers.host + req.originalUrl
+          } else ctx.meta.$statusCode = 403
+          return Promise.reject({
+            success: false,
+            msg: 'Please use HTTPS when communicating with this server',
+          })
         },
         aliases: {
           'auth(.*)': 'auth.HandleRequest',
@@ -61,15 +60,13 @@ module.exports = {
         path: '',
         onBeforeCall(ctx, route, req, res) {
           if (req.method === 'GET') {
-            console.log(res)
-            return res.redirect(
-              301,
-              'https://' + req.headers.host + req.originalUrl,
-            )
-          } else
-            return res
-              .status(403)
-              .send('Please use HTTPS when communicating with this server')
+            ctx.meta.$statusCode = 302
+            ctx.meta.$location = 'https://' + req.headers.host + req.originalUrl
+          } else ctx.meta.$statusCode = 403
+          return Promise.reject({
+            success: false,
+            msg: 'Please use HTTPS when communicating with this server',
+          })
         },
         aliases: {
           '': 'api-unsecure.Root',
