@@ -4,10 +4,10 @@ const fs = require('fs')
 const https =
   process.env.NODE_ENV === 'production'
     ? {
-        key: fs.readFileSync('/etc/letsencrypt/live/dapi.co/privkey.pem'),
-        cert: fs.readFileSync('/etc/letsencrypt/live/dapi.co/cert.pem'),
-        ca: fs.readFileSync('/etc/letsencrypt/live/dapi.co/chain.pem')
-      }
+      key: fs.readFileSync('/etc/letsencrypt/live/dapi.co/privkey.pem'),
+      cert: fs.readFileSync('/etc/letsencrypt/live/dapi.co/cert.pem'),
+      ca: fs.readFileSync('/etc/letsencrypt/live/dapi.co/chain.pem')
+    }
     : {}
 
 module.exports = {
@@ -16,19 +16,14 @@ module.exports = {
   settings: {
     onError(req, res, err) {
       res.setHeader('Content-type', 'application/json; charset=utf-8')
-      res.writeHead(err.code || 500)
 
-      if (err.code == 422) {
-        let o = {}
-        err.data.forEach(e => {
-          let field = e.field.split('.').pop()
-          o[field] = e.message
-        })
-
-        res.end(JSON.stringify({ errors: o }, null, 2))
+      if (typeof (err.message) === 'string') {
+        res.writeHead(err.code || 500)
+        res.end(JSON.stringify({ msg: err.message, ...err.data }, null, 2))
       } else {
-        const errObj = { ...err.message, code: err.code }
-        res.end(JSON.stringify(errObj, null, 2))
+        res.writeHead(err.message.code || 500)
+        delete err.message.code
+        res.end(JSON.stringify(err.message, null, 2))
       }
     },
     https: https,
