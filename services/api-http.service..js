@@ -10,6 +10,13 @@ module.exports = {
 
       if (typeof (err.message) === 'string') {
         res.writeHead(err.code || 500)
+
+        //Handle route not found
+        if (!err.data && err.code === 404) {
+          err.message = 'Endpoint not found'
+          err.data = { success: false }
+        }
+
         res.end(JSON.stringify({ msg: err.message, ...err.data }, null, 2))
       } else {
         res.writeHead(err.message.code || 500)
