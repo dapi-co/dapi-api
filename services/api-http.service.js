@@ -36,11 +36,13 @@ module.exports = {
           if (req.method === 'GET') {
             ctx.meta.$statusCode = 302
             ctx.meta.$location = 'https://' + req.headers.host + req.originalUrl
-          } else ctx.meta.$statusCode = 403
-          return Promise.reject({
-            success: false,
-            msg: 'Please use HTTPS when communicating with this server',
-          })
+          } else {
+            ctx.meta.$statusCode = 403
+            return Promise.reject({
+              success: false,
+              msg: 'Please use HTTPS when communicating with this server',
+            })
+          }
         },
         aliases: {
           'auth(.*)': 'auth.HandleRequest',
