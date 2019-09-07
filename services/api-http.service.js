@@ -34,7 +34,6 @@ module.exports = {
         path: '/v1',
         onBeforeCall(ctx, route, req, res) {
           if (req.method === 'GET') {
-            res.setHeader('Content-type', 'application/json; charset=utf-8')
             res.writeHead(302, {
               Location: 'https://' + req.headers.host + req.originalUrl,
             })
@@ -71,9 +70,7 @@ module.exports = {
       {
         path: '',
         onBeforeCall(ctx, route, req, res) {
-          console.log(route)
           if (req.method === 'GET') {
-            res.setHeader('Content-type', 'application/json; charset=utf-8')
             res.writeHead(302, {
               Location: 'https://' + req.headers.host + req.originalUrl,
             })
