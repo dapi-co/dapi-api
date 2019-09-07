@@ -33,9 +33,26 @@ module.exports = {
       {
         path: '/v1',
         onBeforeCall(ctx, route, req, res) {
-          res.setHeader('Content-type', 'application/json; charset=utf-8')
-          res.writeHead(505)
-          return res.end(JSON.stringify({ msg: 'Please use HTTPS when talking to dapi.co', success: false }, null, 2))
+          if (req.method === 'GET') {
+            res.setHeader('Content-type', 'application/json; charset=utf-8')
+            response.writeHead(302, {
+              Location: 'https://' + req.headers.host + req.originalUrl,
+            })
+            response.end()
+          } else {
+            res.setHeader('Content-type', 'application/json; charset=utf-8')
+            res.writeHead(505)
+            return res.end(
+              JSON.stringify(
+                {
+                  msg: 'Please use HTTPS when talking to dapi.co',
+                  success: false,
+                },
+                null,
+                2,
+              ),
+            )
+          }
         },
         aliases: {
           'auth(.*)': 'auth.HandleRequest',
@@ -54,9 +71,27 @@ module.exports = {
       {
         path: '',
         onBeforeCall(ctx, route, req, res) {
-          res.setHeader('Content-type', 'application/json; charset=utf-8')
-          res.writeHead(505)
-          return res.end(JSON.stringify({ msg: 'Please use HTTPS when talking to dapi.co', success: false }, null, 2))
+          console.log(route)
+          if (req.method === 'GET') {
+            res.setHeader('Content-type', 'application/json; charset=utf-8')
+            response.writeHead(302, {
+              Location: 'https://' + req.headers.host + req.originalUrl,
+            })
+            response.end()
+          } else {
+            res.setHeader('Content-type', 'application/json; charset=utf-8')
+            res.writeHead(505)
+            return res.end(
+              JSON.stringify(
+                {
+                  msg: 'Please use HTTPS when talking to dapi.co',
+                  success: false,
+                },
+                null,
+                2,
+              ),
+            )
+          }
         },
         aliases: {
           '': 'api-unsecure.Root',
