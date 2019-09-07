@@ -8,7 +8,7 @@ module.exports = {
     onError(req, res, err) {
       res.setHeader('Content-type', 'application/json; charset=utf-8')
 
-      if (typeof (err.message) === 'string') {
+      if (typeof err.message === 'string') {
         res.writeHead(err.code || 500)
 
         //Handle route not found
@@ -27,14 +27,21 @@ module.exports = {
     port: process.env.HTTP_PORT || 80,
     cors: {
       origin: '*',
-      methods: ['GET', 'POST']
+      methods: ['GET', 'POST'],
     },
     routes: [
       {
         path: '/v1',
-        onBeforeCall(ctx, route, req, res){
-          console.log('test')
-          console.log(ctx, route, req, res)
+        onBeforeCall(ctx, route, req, res) {
+          if (req.method === 'GET')
+            return res.redirect(
+              301,
+              'https://' + req.headers.host + req.originalUrl,
+            )
+          else
+            return res
+              .status(403)
+              .send('Please use HTTPS when communicating with this server')
         },
         aliases: {
           'auth(.*)': 'auth.HandleRequest',
@@ -42,27 +49,38 @@ module.exports = {
           'jobs/GetJobStatus': 'clients.HandleRequest',
           'users(.*)': 'users.HandleRequest',
           'data/(.*)': 'users.HandleDataRequest',
-          'payment/(.*)': 'users.HandlePaymentRequest'
+          'payment/(.*)': 'users.HandlePaymentRequest',
         },
         bodyParsers: {
           json: { strict: false },
-          urlencoded: { extended: false }
+          urlencoded: { extended: false },
         },
-        authorization: true
+        authorization: true,
       },
       {
         path: '',
+        onBeforeCall(ctx, route, req, res) {
+          if (req.method === 'GET')
+            return res.redirect(
+              301,
+              'https://' + req.headers.host + req.originalUrl,
+            )
+          else
+            return res
+              .status(403)
+              .send('Please use HTTPS when communicating with this server')
+        },
         aliases: {
           '': 'api-unsecure.Root',
-          '/': 'api-unsecure.Root'
+          '/': 'api-unsecure.Root',
         },
         bodyParsers: {
           json: { strict: false },
-          urlencoded: { extended: false }
+          urlencoded: { extended: false },
         },
-        authorization: true
-      }
-    ]
+        authorization: true,
+      },
+    ],
   },
 
   actions: {
@@ -70,10 +88,10 @@ module.exports = {
       handler() {
         return {
           name: 'Dapi Sandbox',
-          apiVersion: 'v1'
+          apiVersion: 'v1',
         }
-      }
-    }
+      },
+    },
   },
 
   methods: {
@@ -85,6 +103,6 @@ module.exports = {
       req.$params.remoteAddress = req.connection.remoteAddress
       req.$params.endpoint = req.parsedUrl.split('/')[3]
       return Promise.resolve('Authorized')
-    }
-  }
+    },
+  },
 }
