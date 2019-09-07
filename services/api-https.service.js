@@ -27,7 +27,7 @@ module.exports = {
       }
     },
     https: https,
-    port: process.env.PORT || 443,
+    port: process.env.HTTPS_PORT || 443,
     cors: {
       origin: '*',
       methods: ['GET', 'POST'],

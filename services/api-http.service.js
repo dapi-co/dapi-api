@@ -24,7 +24,7 @@ module.exports = {
         res.end(JSON.stringify(err.message, null, 2))
       }
     },
-    port: process.env.PORT || 80,
+    port: process.env.HTTP_PORT || 80,
     cors: {
       origin: '*',
       methods: ['GET', 'POST']
