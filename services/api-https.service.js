@@ -4,20 +4,20 @@ const fs = require('fs')
 const https =
   process.env.NODE_ENV === 'production'
     ? {
-      key: fs.readFileSync('/etc/letsencrypt/live/dapi.co/privkey.pem'),
-      cert: fs.readFileSync('/etc/letsencrypt/live/dapi.co/cert.pem'),
-      ca: fs.readFileSync('/etc/letsencrypt/live/dapi.co/chain.pem')
-    }
+        key: fs.readFileSync('/etc/letsencrypt/live/dapi.co/privkey.pem'),
+        cert: fs.readFileSync('/etc/letsencrypt/live/dapi.co/cert.pem'),
+        ca: fs.readFileSync('/etc/letsencrypt/live/dapi.co/chain.pem'),
+      }
     : {}
 
 module.exports = {
-  name: 'api',
+  name: 'api-secure',
   mixins: [APIGateway],
   settings: {
     onError(req, res, err) {
       res.setHeader('Content-type', 'application/json; charset=utf-8')
 
-      if (typeof (err.message) === 'string') {
+      if (typeof err.message === 'string') {
         res.writeHead(err.code || 500)
         res.end(JSON.stringify({ msg: err.message, ...err.data }, null, 2))
       } else {
@@ -30,7 +30,7 @@ module.exports = {
     port: process.env.PORT || 443,
     cors: {
       origin: '*',
-      methods: ['GET', 'POST']
+      methods: ['GET', 'POST'],
     },
     routes: [
       {
@@ -41,27 +41,27 @@ module.exports = {
           'jobs/GetJobStatus': 'clients.HandleRequest',
           'users(.*)': 'users.HandleRequest',
           'data/(.*)': 'users.HandleDataRequest',
-          'payment/(.*)': 'users.HandlePaymentRequest'
+          'payment/(.*)': 'users.HandlePaymentRequest',
         },
         bodyParsers: {
           json: { strict: false },
-          urlencoded: { extended: false }
+          urlencoded: { extended: false },
         },
-        authorization: true
+        authorization: true,
       },
       {
         path: '',
         aliases: {
           '': 'api.Root',
-          '/': 'api.Root'
+          '/': 'api.Root',
         },
         bodyParsers: {
           json: { strict: false },
-          urlencoded: { extended: false }
+          urlencoded: { extended: false },
         },
-        authorization: true
-      }
-    ]
+        authorization: true,
+      },
+    ],
   },
 
   actions: {
@@ -69,10 +69,10 @@ module.exports = {
       handler() {
         return {
           name: 'Dapi Sandbox',
-          apiVersion: 'v1'
+          apiVersion: 'v1',
         }
-      }
-    }
+      },
+    },
   },
 
   methods: {
@@ -84,6 +84,6 @@ module.exports = {
       req.$params.remoteAddress = req.connection.remoteAddress
       req.$params.endpoint = req.parsedUrl.split('/')[3]
       return Promise.resolve('Authorized')
-    }
-  }
+    },
+  },
 }
