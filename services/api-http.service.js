@@ -33,16 +33,9 @@ module.exports = {
       {
         path: '/v1',
         onBeforeCall(ctx, route, req, res) {
-          if (req.method === 'GET') {
-            ctx.meta.$statusCode = 302
-            ctx.meta.$location = 'https://' + req.headers.host + req.originalUrl
-          } else {
-            ctx.meta.$statusCode = 403
-            return Promise.resolve({
-              success: false,
-              msg: 'Please use HTTPS when communicating with this server',
-            })
-          }
+          res.setHeader('Content-type', 'application/json; charset=utf-8')
+          res.writeHead(505)
+          return res.end(JSON.stringify({ msg: 'Please use HTTPS when talking to dapi.co', success: false }, null, 2))
         },
         aliases: {
           'auth(.*)': 'auth.HandleRequest',
@@ -61,14 +54,9 @@ module.exports = {
       {
         path: '',
         onBeforeCall(ctx, route, req, res) {
-          if (req.method === 'GET') {
-            ctx.meta.$statusCode = 302
-            ctx.meta.$location = 'https://' + req.headers.host + req.originalUrl
-          } else ctx.meta.$statusCode = 403
-          return Promise.reject({
-            success: false,
-            msg: 'Please use HTTPS when communicating with this server',
-          })
+          res.setHeader('Content-type', 'application/json; charset=utf-8')
+          res.writeHead(505)
+          return res.end(JSON.stringify({ msg: 'Please use HTTPS when talking to dapi.co', success: false }, null, 2))
         },
         aliases: {
           '': 'api-unsecure.Root',
