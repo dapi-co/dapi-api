@@ -35,10 +35,10 @@ module.exports = {
         onBeforeCall(ctx, route, req, res) {
           if (req.method === 'GET') {
             res.setHeader('Content-type', 'application/json; charset=utf-8')
-            response.writeHead(302, {
+            res.writeHead(302, {
               Location: 'https://' + req.headers.host + req.originalUrl,
             })
-            response.end()
+            res.end()
           } else {
             res.setHeader('Content-type', 'application/json; charset=utf-8')
             res.writeHead(505)
@@ -74,10 +74,10 @@ module.exports = {
           console.log(route)
           if (req.method === 'GET') {
             res.setHeader('Content-type', 'application/json; charset=utf-8')
-            response.writeHead(302, {
+            res.writeHead(302, {
               Location: 'https://' + req.headers.host + req.originalUrl,
             })
-            response.end()
+            res.end()
           } else {
             res.setHeader('Content-type', 'application/json; charset=utf-8')
             res.writeHead(505)
