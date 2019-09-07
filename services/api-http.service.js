@@ -34,10 +34,9 @@ module.exports = {
         path: '/v1',
         onBeforeCall(ctx, route, req, res) {
           if (req.method === 'GET') {
-            res.writeHead(302, {
+            return res.writeHead(302, {
               Location: 'https://' + req.headers.host + req.originalUrl,
             })
-            return res.end()
           } else {
             res.writeHead(505)
             return res.end(
@@ -70,11 +69,10 @@ module.exports = {
         path: '',
         onBeforeCall(ctx, route, req, res) {
           if (req.method === 'GET') {
-            res.writeHead(302, {
+            return res.writeHead(302, {
               Location: 'https://' + req.headers.host + req.originalUrl,
             })
-            return res.end()
-          } else {
+          } else {  
             res.writeHead(505)
             return res.end(
               JSON.stringify(
