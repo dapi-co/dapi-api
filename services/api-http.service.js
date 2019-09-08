@@ -26,8 +26,8 @@ module.exports = {
         path: '/',
         whitelist: ['**'],
         aliases: {
-          '': 'api-secure.Root',
-          '/': 'api-secure.Root',
+          '': 'api-unsecure.Root',
+          '/': 'api-unsecure.Root',
         },
         onBeforeCall(ctx, route, req, res) {
           if (req.method === 'GET') {
@@ -60,8 +60,8 @@ module.exports = {
         path: '/v1',
         whitelist: ['**'],
         aliases: {
-          '': 'api-secure.Root',
-          '/': 'api-secure.Root',
+          '': 'api-unsecure.Root',
+          '/': 'api-unsecure.Root',
         },
         onBeforeCall(ctx, route, req, res) {
           if (req.method === 'GET') {
@@ -91,5 +91,15 @@ module.exports = {
         },
       },
     ],
+  },
+  actions: {
+    Root: {
+      handler() {
+        return {
+          name: 'Dapi Sandbox',
+          apiVersion: 'v1',
+        }
+      },
+    },
   },
 }
