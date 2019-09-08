@@ -15,8 +15,6 @@ module.exports = {
   mixins: [APIGateway],
   settings: {
     onError(req, res, err) {
-      res.setHeader('Content-type', 'application/json; charset=utf-8')
-
       if (typeof (err.message) === 'string') {
         res.writeHead(err.code || 500)
 
@@ -43,6 +41,8 @@ module.exports = {
       {
         path: '/v1',
         aliases: {
+          '': 'api-secure.Root',
+          '/': 'api-secure.Root',
           'auth(.*)': 'auth.HandleRequest',
           'clients(.*)': 'clients.HandleRequest',
           'jobs/GetJobStatus': 'clients.HandleRequest',
