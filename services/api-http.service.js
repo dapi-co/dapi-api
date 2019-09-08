@@ -11,8 +11,7 @@ module.exports = {
           err.message = 'Endpoint not found'
           err.data = { success: false }
         }
-        if (!res.headersSent)
-          res.setHeader('Content-type', 'application/json; charset=utf-8')
+        res.setHeader('Content-type', 'application/json; charset=utf-8')
         res.end(JSON.stringify({ msg: err.message, ...err.data }, null, 2))
       }
     },
@@ -31,14 +30,15 @@ module.exports = {
         },
         onBeforeCall(ctx, route, req, res) {
           if (req.method === 'GET') {
-            res.writeHead(302, {
-              Location: 'https://' + req.headers.host + req.originalUrl,
-            })
+            res.setHeader(
+              'Location',
+              'https://' + req.headers.host + req.originalUrl,
+            )
+            res.statusCode = 301
             return res.end()
           } else {
-            res.writeHead(505, {
-              'Content-type': 'application/json; charset=utf-8',
-            })
+            res.setHeader('Content-type', 'application/json; charset=utf-8')
+            res.statusCode = 505
             return res.end(
               JSON.stringify(
                 {
@@ -65,16 +65,15 @@ module.exports = {
         },
         onBeforeCall(ctx, route, req, res) {
           if (req.method === 'GET') {
-            if (!res.headersSent)
-              res.writeHead(302, {
-                Location: 'https://' + req.headers.host + req.originalUrl,
-              })
+            res.setHeader(
+              'Location',
+              'https://' + req.headers.host + req.originalUrl,
+            )
+            res.statusCode = 301
             return res.end()
           } else {
-            if (!res.headersSent)
-            res.writeHead(505, {
-              'Content-type': 'application/json; charset=utf-8',
-            })
+            res.setHeader('Content-type', 'application/json; charset=utf-8')
+            res.statusCode = 505
             return res.end(
               JSON.stringify(
                 {
