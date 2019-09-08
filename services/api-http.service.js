@@ -65,11 +65,13 @@ module.exports = {
         },
         onBeforeCall(ctx, route, req, res) {
           if (req.method === 'GET') {
-            res.writeHead(302, {
-              Location: 'https://' + req.headers.host + req.originalUrl,
-            })
+            if (!res.headersSent)
+              res.writeHead(302, {
+                Location: 'https://' + req.headers.host + req.originalUrl,
+              })
             return res.end()
           } else {
+            if (!res.headersSent)
             res.writeHead(505, {
               'Content-type': 'application/json; charset=utf-8',
             })
