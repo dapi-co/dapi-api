@@ -34,6 +34,7 @@ module.exports = {
             res.writeHead(302, {
               Location: 'https://' + req.headers.host + req.originalUrl,
             })
+            return res.end()
           } else {
             res.writeHead(505, {
               'Content-type': 'application/json; charset=utf-8',
@@ -67,6 +68,7 @@ module.exports = {
             res.writeHead(302, {
               Location: 'https://' + req.headers.host + req.originalUrl,
             })
+            return res.end()
           } else {
             res.writeHead(505, {
               'Content-type': 'application/json; charset=utf-8',
@@ -93,10 +95,10 @@ module.exports = {
   actions: {
     Root: {
       handler() {
-        return {
+        Promise.resolve({
           name: 'Dapi Sandbox',
           apiVersion: 'v1',
-        }
+        })
       },
     },
   },
