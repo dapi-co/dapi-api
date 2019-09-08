@@ -33,6 +33,9 @@ module.exports = {
             )
           }
         },
+        whitelist: [
+          '**'
+        ],
         bodyParsers: {
           json: { strict: false },
           urlencoded: { extended: false },
@@ -60,6 +63,9 @@ module.exports = {
             )
           }
         },
+        whitelist: [
+          '**'
+        ],
         bodyParsers: {
           json: { strict: false },
           urlencoded: { extended: false },
