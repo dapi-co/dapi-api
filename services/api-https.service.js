@@ -16,17 +16,17 @@ module.exports = {
   settings: {
     onError(req, res, err) {
       if (typeof (err.message) === 'string') {
-        res.writeHead(err.code || 500)
-
+        res.statusCode = err.code || 500
         //Handle route not found
         if (!err.data && err.code === 404) {
           err.message = 'Endpoint not found'
           err.data = { success: false }
         }
-
+        if(!res.headersSent)
+          res.setHeader('Content-type', 'application/json; charset=utf-8')
         res.end(JSON.stringify({ msg: err.message, ...err.data }, null, 2))
       } else {
-        res.writeHead(err.message.code || 500)
+        res.statusCode = err.message.code || 500
         delete err.message.code
         res.end(JSON.stringify(err.message, null, 2))
       }
