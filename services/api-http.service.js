@@ -6,8 +6,8 @@ module.exports = {
   mixins: [APIGateway],
   settings: {
     onError(req, res, err) {
+      res.setHeader('Content-type', 'application/json; charset=utf-8')
       if (typeof err.message === 'string') {
-        res.writeHead(err.code || 500)
         if (!err.data && err.code === 404) {
           err.message = 'Endpoint not found'
           err.data = { success: false }
