@@ -6,12 +6,12 @@ module.exports = {
   mixins: [APIGateway],
   settings: {
     onError(req, res, err) {
-      res.setHeader('Content-type', 'application/json; charset=utf-8')
       if (typeof err.message === 'string') {
         if (!err.data && err.code === 404) {
           err.message = 'Endpoint not found'
           err.data = { success: false }
         }
+        res.setHeader('Content-type', 'application/json; charset=utf-8')
         res.end(JSON.stringify({ msg: err.message, ...err.data }, null, 2))
       }
     },
@@ -35,7 +35,7 @@ module.exports = {
             })
             return res.end()
           } else {
-            res.writeHead(505)
+            res.writeHead(505, {'Content-type': 'application/json; charset=utf-8'})
             return res.end(
               JSON.stringify(
                 {
@@ -67,7 +67,7 @@ module.exports = {
             })
             return res.end()
           } else {
-            res.writeHead(505)
+            res.writeHead(505, {'Content-type': 'application/json; charset=utf-8'})
             return res.end(
               JSON.stringify(
                 {
