@@ -15,6 +15,9 @@ module.exports = {
   mixins: [APIGateway],
   settings: {
     onError(req, res, err) {
+      if(!res.headersSent)
+        res.setHeader('Content-type', 'application/json; charset=utf-8')
+        
       if (typeof (err.message) === 'string') {
         res.statusCode = err.code || 500
         //Handle route not found
@@ -22,8 +25,6 @@ module.exports = {
           err.message = 'Endpoint not found'
           err.data = { success: false }
         }
-        if(!res.headersSent)
-          res.setHeader('Content-type', 'application/json; charset=utf-8')
         res.end(JSON.stringify({ msg: err.message, ...err.data }, null, 2))
       } else {
         res.statusCode = err.message.code || 500
