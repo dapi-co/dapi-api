@@ -5,6 +5,16 @@ module.exports = {
   name: 'api-unsecure',
   mixins: [APIGateway],
   settings: {
+    onError(req, res, err) {
+      if (typeof err.message === 'string') {
+        res.writeHead(err.code || 500)
+        if (!err.data && err.code === 404) {
+          err.message = 'Endpoint not found'
+          err.data = { success: false }
+        }
+        res.end(JSON.stringify({ msg: err.message, ...err.data }, null, 2))
+      }
+    },
     port: process.env.HTTP_PORT || 80,
     cors: {
       origin: '*',
