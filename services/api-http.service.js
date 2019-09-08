@@ -24,6 +24,10 @@ module.exports = {
       {
         path: '/',
         whitelist: ['**'],
+        aliases: {
+          '': 'api-secure.Root',
+          '/': 'api-secure.Root',
+        },
         onBeforeCall(ctx, route, req, res) {
           if (req.method === 'GET') {
             res.writeHead(302, {
@@ -52,6 +56,10 @@ module.exports = {
       {
         path: '/v1',
         whitelist: ['**'],
+        aliases: {
+          '': 'api-secure.Root',
+          '/': 'api-secure.Root',
+        },
         onBeforeCall(ctx, route, req, res) {
           if (req.method === 'GET') {
             res.writeHead(302, {
