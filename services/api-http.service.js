@@ -1,12 +1,20 @@
 const APIGateway = require('moleculer-web')
-const redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
 
 module.exports = {
   name: 'api-unsecure',
   mixins: [APIGateway],
   settings: {
     use: [
-      redirectToHTTPS()
+      (req, res) => {
+        res.setHeader('Content-type', 'application/json; charset=utf-8')
+        if (req.method === 'GET')
+          res.redirect(301, 'https://' + req.headers.host + req.originalUrl)
+        else
+          res.send(505).json({
+            msg: 'Please use HTTPS when talking to dapi.co',
+            success: false,
+          })
+      },
     ],
     onError(req, res, err) {
       if (typeof err.message === 'string') {
