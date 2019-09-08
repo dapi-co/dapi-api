@@ -31,29 +31,6 @@ module.exports = {
           '': 'api-unsecure.Root',
           '/': 'api-unsecure.Root',
         },
-        onBeforeCall(ctx, route, req, res) {
-          if (req.method === 'GET') {
-            res.setHeader(
-              'Location',
-              'https://' + req.headers.host + req.originalUrl,
-            )
-            res.statusCode = 301
-            return res.end()
-          } else {
-            res.setHeader('Content-type', 'application/json; charset=utf-8')
-            res.statusCode = 505
-            return res.end(
-              JSON.stringify(
-                {
-                  msg: 'Please use HTTPS when talking to dapi.co',
-                  success: false,
-                },
-                null,
-                2,
-              ),
-            )
-          }
-        },
         bodyParsers: {
           json: { strict: false },
           urlencoded: { extended: false },
@@ -66,29 +43,7 @@ module.exports = {
           '': 'api-unsecure.Root',
           '/': 'api-unsecure.Root',
         },
-        onBeforeCall(ctx, route, req, res) {
-          if (req.method === 'GET') {
-            res.setHeader(
-              'Location',
-              'https://' + req.headers.host + req.originalUrl,
-            )
-            res.statusCode = 301
-            return res.end()
-          } else {
-            res.setHeader('Content-type', 'application/json; charset=utf-8')
-            res.statusCode = 505
-            return res.end(
-              JSON.stringify(
-                {
-                  msg: 'Please use HTTPS when talking to dapi.co',
-                  success: false,
-                },
-                null,
-                2,
-              ),
-            )
-          }
-        },
+
         bodyParsers: {
           json: { strict: false },
           urlencoded: { extended: false },
