@@ -6,17 +6,18 @@ module.exports = {
   settings: {
     use: [
       (req, res) => {
-        res.setHeader('Content-type', 'application/json; charset=utf-8')
+        console.log('middleware')
         if (req.method === 'GET') {
+          res.statusCode = 301
           res.setHeader(
             'Location',
             'https://' + req.headers.host + req.originalUrl,
-          )
-          res.statusCode = 301
-          return res.end()
-        } else {
+            )
+            return res.end()
+          } else {
+          res.setHeader('Content-type', 'application/json; charset=utf-8')
           res.statusCode = 505
-          res.end(
+          return res.end(
             JSON.stringify(
               {
                 msg: 'Please use HTTPS when talking to dapi.co',
