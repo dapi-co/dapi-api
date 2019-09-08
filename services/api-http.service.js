@@ -1,10 +1,13 @@
 const APIGateway = require('moleculer-web')
-const fs = require('fs')
+const redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
 
 module.exports = {
   name: 'api-unsecure',
   mixins: [APIGateway],
   settings: {
+    use: [
+      redirectToHTTPS()
+    ],
     onError(req, res, err) {
       if (typeof err.message === 'string') {
         if (!err.data && err.code === 404) {
