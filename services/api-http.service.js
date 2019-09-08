@@ -12,7 +12,8 @@ module.exports = {
     },
     routes: [
       {
-        path: '',
+        path: '/',
+        whitelist: ['**'],
         onBeforeCall(ctx, route, req, res) {
           if (req.method === 'GET') {
             res.writeHead(302, {
@@ -33,9 +34,6 @@ module.exports = {
             )
           }
         },
-        whitelist: [
-          '**'
-        ],
         bodyParsers: {
           json: { strict: false },
           urlencoded: { extended: false },
@@ -43,6 +41,7 @@ module.exports = {
       },
       {
         path: '/v1',
+        whitelist: ['**'],
         onBeforeCall(ctx, route, req, res) {
           if (req.method === 'GET') {
             res.writeHead(302, {
@@ -63,9 +62,6 @@ module.exports = {
             )
           }
         },
-        whitelist: [
-          '**'
-        ],
         bodyParsers: {
           json: { strict: false },
           urlencoded: { extended: false },
