@@ -7,9 +7,14 @@ module.exports = {
     use: [
       (req, res) => {
         res.setHeader('Content-type', 'application/json; charset=utf-8')
-        if (req.method === 'GET')
-          res.redirect(301, 'https://' + req.headers.host + req.originalUrl)
-        else {
+        if (req.method === 'GET') {
+          res.setHeader(
+            'Location',
+            'https://' + req.headers.host + req.originalUrl,
+          )
+          res.statusCode = 301
+          return res.end()
+        } else {
           res.statusCode = 505
           res.end(
             JSON.stringify(
