@@ -41,14 +41,14 @@ module.exports = {
       {
         path: '/v1',
         aliases: {
-          '': 'api-secure.Root',
-          '/': 'api-secure.Root',
-          'auth(.*)': 'auth.HandleRequest',
-          'clients(.*)': 'clients.HandleRequest',
-          'jobs/GetJobStatus': 'clients.HandleRequest',
-          'users(.*)': 'users.HandleRequest',
-          'data/(.*)': 'users.HandleDataRequest',
-          'payment/(.*)': 'users.HandlePaymentRequest',
+          'GET ': 'api-secure.Root',
+          'GET /': 'api-secure.Root',
+          'POST auth(.*)': 'auth.HandleRequest',
+          'POST clients(.*)': 'clients.HandleRequest',
+          'POST jobs/GetJobStatus': 'clients.HandleRequest',
+          'POST users(.*)': 'users.HandleRequest',
+          'POST data/(.*)': 'users.HandleDataRequest',
+          'POST payment/(.*)': 'users.HandlePaymentRequest',
         },
         bodyParsers: {
           json: { strict: false },
@@ -59,8 +59,8 @@ module.exports = {
       {
         path: '',
         aliases: {
-          '': 'api-secure.Root',
-          '/': 'api-secure.Root',
+          'GET ': 'api-secure.Root',
+          'GET /': 'api-secure.Root',
         },
         bodyParsers: {
           json: { strict: false },
