@@ -4,10 +4,10 @@ const fs = require('fs')
 const https =
   process.env.NODE_ENV === 'production'
     ? {
-        key: fs.readFileSync('/etc/letsencrypt/live/dapi.co/privkey.pem'),
-        cert: fs.readFileSync('/etc/letsencrypt/live/dapi.co/cert.pem'),
-        ca: fs.readFileSync('/etc/letsencrypt/live/dapi.co/chain.pem'),
-      }
+      key: fs.readFileSync('/etc/letsencrypt/live/dapi.co/privkey.pem'),
+      cert: fs.readFileSync('/etc/letsencrypt/live/dapi.co/cert.pem'),
+      ca: fs.readFileSync('/etc/letsencrypt/live/dapi.co/chain.pem'),
+    }
     : {}
 
 module.exports = {
@@ -15,17 +15,31 @@ module.exports = {
   mixins: [APIGateway],
   settings: {
     onError(req, res, err) {
-      if(!res.headersSent)
+      if (!res.headersSent)
         res.setHeader('Content-type', 'application/json; charset=utf-8')
-        
+
+      //Moleculer errors
       if (typeof (err.message) === 'string') {
         res.statusCode = err.code || 500
-        //Handle route not found
-        if (!err.data && err.code === 404) {
-          err.message = 'Endpoint not found'
-          err.data = { success: false }
+
+        switch (err.code) {
+          case 404:
+            if (!err.data) {
+              err.message = 'Endpoint not found'
+              err.data = { success: false }
+            }
+            break;
+
+          case 422:
+            err.data = {
+              success: false,
+              field: err.data[0].field,
+              err: err.data[0].message
+            }
+            break;
         }
         res.end(JSON.stringify({ msg: err.message, ...err.data }, null, 2))
+        //Promise.reject
       } else {
         res.statusCode = err.message.code || 500
         delete err.message.code
