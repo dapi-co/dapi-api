@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "entry point",
   "scripts": {
-    "dev": "node node_modules/moleculer/bin/moleculer-runner --hot services --envfile ./.env.dev"
+    "dev": "node node_modules/moleculer/bin/moleculer-runner --hot services --envfile ./.env.dev",
+    "start": "moleculer-runner services"
   },
   "repository": {
     "type": "git",

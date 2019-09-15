@@ -11,9 +11,9 @@ module.exports = {
           res.setHeader(
             'Location',
             'https://' + req.headers.host + req.originalUrl,
-            )
-            return res.end()
-          } else {
+          )
+          return res.end()
+        } else {
           res.setHeader('Content-type', 'application/json; charset=utf-8')
           res.statusCode = 505
           return res.end(

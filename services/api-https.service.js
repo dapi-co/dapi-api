@@ -4,9 +4,9 @@ const fs = require('fs')
 const https =
   process.env.NODE_ENV === 'production'
     ? {
-      key: fs.readFileSync('/etc/letsencrypt/live/dapi.co/privkey.pem'),
-      cert: fs.readFileSync('/etc/letsencrypt/live/dapi.co/cert.pem'),
-      ca: fs.readFileSync('/etc/letsencrypt/live/dapi.co/chain.pem'),
+      //key: fs.readFileSync('/etc/letsencrypt/live/dapi.co/privkey.pem'),
+      //cert: fs.readFileSync('/etc/letsencrypt/live/dapi.co/cert.pem'),
+      //ca: fs.readFileSync('/etc/letsencrypt/live/dapi.co/chain.pem'),
     }
     : {}
 
