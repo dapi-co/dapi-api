@@ -1,0 +1,87 @@
+version: "3.5"
+
+services:
+
+  api:
+    build:
+      context: api
+    image: api-service
+    container_name: api
+    env_file: docker-compose.env
+    environment:
+      HTTPS_PORT: 4433
+      HTTP_PORT: 800
+    labels:
+      - "traefik.enable=true"
+      - "traefik.port=4433"
+      - "traefik.backend=api-service"
+      - "traefik.frontend.entryPoints=https"
+      - "traefik.frontend.rule=Host:sandbox.dapi.co; Method:GET,POST"
+    network_mode: host
+
+  auth:
+    build:
+      context: auth-service
+    image: auth-service
+    container_name: auth-service
+    env_file: docker-compose.env
+    labels:
+      - "traefik.enable=false"
+    network_mode: host
+
+  users:
+    build:
+      context: users-service
+    image: users-service
+    container_name: users-service
+    env_file: docker-compose.env
+    labels:
+      - "traefik.enable=false"
+    network_mode: host
+
+  clients:
+    build:
+      context: clients-service
+    image: clients-service
+    container_name: clients-service
+    env_file: docker-compose.env
+    labels:
+      - "traefik.enable=false"
+    network_mode: host
+
+  jobs:
+    build:
+      context: jobs-service
+    image: jobs-service
+    container_name: jobs-service
+    env_file: docker-compose.env
+    labels:
+      - "traefik.enable=false"
+    network_mode: host
+
+  notify:
+    build:
+      context: notify-service
+    image: notify-service
+    container_name: notify-service
+    env_file: docker-compose.env
+    labels:
+      - "traefik.enable=false"
+    network_mode: host
+
+  traefik:
+    image: traefik
+    container_name: traefik
+    command:
+      - "--api"
+      - "--docker"
+      - "--docker.watch"
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /root/traefik.toml:/traefik.toml
+      - /etc/letsencrypt/live/dapi.co/privkey.pem:/etc/letsencrypt/live/dapi.co/privkey.pem
+      - /etc/letsencrypt/live/dapi.co/cert.pem:/etc/letsencrypt/live/dapi.co/cert.pem
+    network_mode: host

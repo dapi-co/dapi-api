@@ -1,0 +1,40 @@
+defaultEntryPoints = ["http", "https"] 
+
+[entryPoints]
+  [entryPoints.traefik]
+    address = ":8080"
+      [entryPoints.traefik.tls]
+        [[entryPoints.traefik.tls.certificates]]
+          keyFile = "/etc/letsencrypt/live/dapi.co/privkey.pem"
+          certFile = "/etc/letsencrypt/live/dapi.co/cert.pem"
+      [entryPoints.traefik.auth]
+        [entryPoints.traefik.auth.basic]         
+          users = ["admin:$apr1$R5uNHOzZ$cBK/9IAvXoSvtxlh7fs12/"]
+
+ [entryPoints.http] 
+   address = ":80"
+     [entryPoints.http.redirect]
+       entryPoint = "https"
+
+ [entryPoints.https]
+   address = ":443"
+     [entryPoints.https.tls]
+       [[entryPoints.https.tls.certificates]]
+         keyFile = "/etc/letsencrypt/live/dapi.co/privkey.pem"   
+         certFile = "/etc/letsencrypt/live/dapi.co/cert.pem"          
+
+[api]
+entrypoint = "traefik"
+dashboard = true
+
+[http.routers.my-api]     
+  rule="PathPrefix(`/dashboard`)"     
+  service="api@internal"     
+  middlewares=["auth"]
+
+[docker] 
+endpoint = "unix:///var/run/docker.sock" 
+domain = "docker.localhost" 
+exposedByDefault = false
+watch = true
+
