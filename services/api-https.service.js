@@ -58,6 +58,7 @@ module.exports = {
         aliases: {
           'GET ': 'api-secure.Root',
           'GET /': 'api-secure.Root',
+          'GET config/GetAllBanks': 'config.GetAllBanks',
           'POST auth(.*)': 'auth.HandleRequest',
           'POST clients(.*)': 'clients.HandleRequest',
           'POST jobs/GetJobStatus': 'clients.HandleRequest',
