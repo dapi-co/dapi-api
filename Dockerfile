@@ -7,8 +7,8 @@ RUN mkdir /app
 WORKDIR /app
 
 # Get certs
-RUN mkdir -p /etc/letsencrypt/live/dapi.co/
-COPY certs/* /etc/letsencrypt/live/dapi.co/
+#RUN mkdir -p /etc/letsencrypt/live/dapi.co/
+#COPY certs/* /etc/letsencrypt/live/dapi.co/
 
 # Install app
 COPY package.json package-lock.json ./
