@@ -103,7 +103,7 @@ module.exports = {
       if (token && token.startsWith('Bearer')) token = token.slice(7)
 
       req.$params.jwt = token
-      req.$params.remoteAddress = req.connection.remoteAddress
+      req.$params.remoteAddress = req.headers['x-real-ip'] || req.connection.remoteAddress
       req.$params.endpoint = req.parsedUrl.split('/')[3]
       return Promise.resolve('Authorized')
     },
