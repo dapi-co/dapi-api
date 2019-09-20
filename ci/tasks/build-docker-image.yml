@@ -5,7 +5,7 @@ image_resource:
   source: {repository: busybox}
 
 inputs:
-- name: service
+- name: api
 
 run:
   path: service/ci/scripts/build-docker-image.sh
