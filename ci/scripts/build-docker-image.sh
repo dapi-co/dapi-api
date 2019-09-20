@@ -2,8 +2,4 @@
 
 set -ex
 
-echo Hello!!
-ls -al
-ls -al ../ 
-ls -al ../../ 
-ls -al ../../ 
+docker build api -t api-service:latest
