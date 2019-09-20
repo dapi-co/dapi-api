@@ -8,4 +8,4 @@ inputs:
 - name: api
 
 run:
-  path: service/ci/scripts/build-docker-image.sh
+  path: api/ci/scripts/build-docker-image.sh
