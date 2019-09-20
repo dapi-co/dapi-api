@@ -1,0 +1,15 @@
+resources:
+- name: api
+  type: git
+  source: 
+    uri: "git@github.com:dapi-co/api.git"
+    branch: master
+    private_key: ((priv-key))
+
+jobs:
+- name: build-docker-image
+  plan:
+  - get: api
+    trigger: true
+  - task: build-docker-image
+    file: api/ci/tasks/build-docker-image.yml
