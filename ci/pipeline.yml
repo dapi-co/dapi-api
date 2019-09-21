@@ -11,7 +11,7 @@ resources:
   source:
     username: ((docker-hub-username))
     password: ((docker-hub-password))
-    repository: ((docker-registry))/((docker-repository))
+    repository: ((docker-registry))/services/api-service
 
 jobs:
 - name: build-docker-image
