@@ -23,3 +23,5 @@ jobs:
   - put: api-docker-image
     params: 
       build: api
+    get_params:
+      skip_download: true
