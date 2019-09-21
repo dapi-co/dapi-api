@@ -11,7 +11,7 @@ resources:
   source:
     username: ((docker-hub-username))
     password: ((docker-hub-password))
-    repository: ((docker-registry))/((docker-hub-username))/concourse-tutorial-hello-world
+    repository: ((docker-registry))/((docker-repository))
 
 jobs:
 - name: build-docker-image
