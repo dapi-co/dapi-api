@@ -6,10 +6,20 @@ resources:
     branch: master
     private_key: ((priv-key))
 
+- name: api-docker-image
+  type: docker-image
+  source:
+    username: ((docker-hub-username))
+    password: ((docker-hub-password))
+    repository: ((docker-registry))/((docker-hub-username))/concourse-tutorial-hello-world
+
 jobs:
 - name: build-docker-image
   plan:
   - get: api
     trigger: true
-  - task: build-docker-image
-    file: api/ci/tasks/build-docker-image.yml
+  # - task: build-docker-image
+  #   file: api/ci/tasks/build-docker-image.yml
+  - put: api-docker-image
+    params: 
+      build: api
