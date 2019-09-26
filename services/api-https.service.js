@@ -1,8 +1,7 @@
 const APIGateway = require('moleculer-web')
 const fs = require('fs')
 
-const https =
-  process.env.NODE_ENV === 'production' ? {} : {}
+const https = process.env.NODE_ENV === 'production' ? {} : {}
 
 module.exports = {
   name: 'api-secure',
