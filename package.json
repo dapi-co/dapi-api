@@ -4,7 +4,7 @@
   "description": "entry point",
   "scripts": {
     "dev": "node node_modules/moleculer/bin/moleculer-runner --hot services --envfile ./.env.dev",
-    "start": "moleculer-runner services --env .env"
+    "start": "moleculer-runner --envfile ./.env services"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
     "ioredis": "^4.14.1",
     "moleculer": "^0.14.0-beta3",
     "moleculer-web": "^0.9.0-beta6",
-    "nats": "^1.3.0"
+    "nats": "^1.3.0",
+    "redlock": "^4.0.0"
   }
 }
