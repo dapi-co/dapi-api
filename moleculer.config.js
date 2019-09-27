@@ -21,7 +21,7 @@ module.exports = {
         port: 6380,
         password: 'dDc7Rn8NInIeaKs5xwocPOwZzr4O9EvVoTVI1akKE+A=',
       },
-    },
+    }, 
   },
   metrics: true,
 }

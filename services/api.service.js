@@ -38,7 +38,6 @@ module.exports = {
         res.end(JSON.stringify(err.message, null, 2))
       }
     },
-    https: https,
     port: process.env.HTTPS_PORT || 443,
     cors: {
       origin: '*',
@@ -83,7 +82,7 @@ module.exports = {
     Root: {
       handler() {
         return {
-          name: 'Dapi Sandbox',
+          name: 'dapi Sandbox',
           apiVersion: 'v1',
         }
       },
