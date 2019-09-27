@@ -16,7 +16,7 @@ module.exports = {
     prefix: 'MOL-API',
     monitor: true,
     redis: {
-      host: 'dapi.redis.cache.windows.net',
+      host: 'redis://dapi.redis.cache.windows.net',
       port: 6380,
       password: 'dDc7Rn8NInIeaKs5xwocPOwZzr4O9EvVoTVI1akKE+A=',
     },
