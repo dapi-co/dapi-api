@@ -6,7 +6,7 @@ module.exports = {
   transporter: {
     type: 'NATS',
     options: {
-      urls: ['11.0.0.4', '11.0.0.5'],
+      urls: ['nats://11.0.0.4:4222', 'nats://11.0.0.5:4222'],
       user: 'nats',
       pass: 'JRrx8P8l0FCh',
     },
