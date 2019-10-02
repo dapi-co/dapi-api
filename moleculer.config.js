@@ -6,9 +6,9 @@ module.exports = {
   transporter: {
     type: 'NATS',
     options: {
-      urls: ['nats://11.0.0.4:4222', 'nats://11.0.0.5:4222'],
+      urls: ['nats://10.0.0.4:4222', 'nats://10.0.0.5:4222'],
       user: 'nats',
-      pass: 'JRrx8P8l0FCh',
+      pass: 'LXl&3rb@4s#e1JAb1uA6fTFX#zJK@eF$',
     },
   },
   cacher: {
@@ -19,7 +19,7 @@ module.exports = {
       redis: {
         host: 'dapi.redis.cache.windows.net',
         port: 6380,
-        password: 'dDc7Rn8NInIeaKs5xwocPOwZzr4O9EvVoTVI1akKE+A=',
+        password: 'NZr7JZ8nmK1FaYfXQnmgnv+nVyxsRSZaStRDtQ1pHRY=',
       },
     }, 
   },
