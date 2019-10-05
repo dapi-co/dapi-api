@@ -33,7 +33,7 @@ module.exports = {
         type: "Prometheus",
         options: {
           port: 3030,
-          path: "http://40.123.212.110/metrics",
+          path: "/metrics",
           defaultLabels: registry => ({
             namespace: registry.broker.namespace,
             nodeID: registry.broker.nodeID
