@@ -1,9 +1,12 @@
 const os = require('os')
 module.exports = {
   nodeID: 'api-' + os.hostname().toLowerCase() + '-' + process.pid,
-  logger: true,
-  logLevel: 'info',
-
+  logger: {
+    type: "Pino",
+    options: {
+      level: "info"
+    }
+  },
   transporter: {
     type: 'NATS',
     options: {
