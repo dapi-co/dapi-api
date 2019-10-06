@@ -24,6 +24,7 @@ jobs:
       build: api
       build_args:
         ELK_URL: ((ELK_URL))
+        SERVICE: api-service
     get_params:
       skip_download: true
 
