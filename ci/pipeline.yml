@@ -30,9 +30,13 @@ jobs:
     trigger: true
     passed:
     - build-docker-image
+  - get: api
   - task: update-scale-set
     file: api/ci/tasks/update-scale-set.yml
     params:
       AZURE_TENANT: ((azure-tenant))
       AZURE_USER: ((azure-user))
       AZURE_PASS: ((azure-pass))
+      AZURE_RG: ((azure-rg))
+      AZURE_SS_NAME: Api0000SS
+      SERVICE: api-service

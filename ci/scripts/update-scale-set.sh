@@ -7,7 +7,7 @@ az login --service-principal \
 -u "$AZURE_USER" \
 -p "$AZURE_PASS"
 
-# az vmss list-instances -n MyVMSS -g my-rg --query "[].id" --output tsv | \
-# az vmss run-command invoke --command-id "RunShellScript" \
-# --scripts "ls" \
-# --ids 
+az vmss list-instances -n "$AZURE_SS_NAME" -g $AZURE_RG --query "[].id" --output tsv | \
+az vmss run-command invoke --command-id "RunShellScript" \
+--scripts "sudo docker service update -d $SERVICE" \
+--ids @-
