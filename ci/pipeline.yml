@@ -18,10 +18,21 @@ jobs:
   plan:
   - get: api
     trigger: true
-  # - task: build-docker-image
-  #   file: api/ci/tasks/build-docker-image.yml
   - put: api-docker-image
     params: 
       build: api
     get_params:
       skip_download: true
+
+- name: update-scale-set
+  plan:
+  - get: api-docker-image
+    trigger: true
+    passed:
+    - build-docker-image
+  - task: update-scale-set
+    file: api/ci/tasks/update-scale-set.yml
+    params:
+      AZURE_TENANT: ((azure-tenant))
+      AZURE_USER: ((azure-user))
+      AZURE_PASS: ((azure-pass))
