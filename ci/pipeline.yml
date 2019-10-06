@@ -15,6 +15,7 @@ resources:
 
 jobs:
 - name: build-docker-image
+  serial: true
   plan:
   - get: api
     trigger: true
@@ -25,6 +26,7 @@ jobs:
       skip_download: true
 
 - name: update-scale-set
+  serial: true
   plan:
   - get: api-docker-image
     trigger: true
