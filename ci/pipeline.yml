@@ -22,6 +22,8 @@ jobs:
   - put: api-docker-image
     params: 
       build: api
+      build_args:
+        ELK_URL: ((ELK_URL))
     get_params:
       skip_download: true
 
