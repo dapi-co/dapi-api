@@ -9,5 +9,5 @@ az login --service-principal \
 
 az vmss list-instances -n "$AZURE_SS_NAME" -g $AZURE_RG --query "[].id" --output tsv | \
 az vmss run-command invoke --command-id "RunShellScript" \
---scripts "sudo docker service update -d --image $CR_DOMAIN/$SERVICE $SERVICE" \
+--scripts "sudo docker service update -d --force --image $CR_DOMAIN/$SERVICE $SERVICE" \
 --ids @-
