@@ -12,7 +12,7 @@ WORKDIR /app
 # Install app
 COPY package.json package-lock.json ./
 
-RUN npm install --production
+RUN npm install --production && npm install pino-elasticsearch -g
 
 COPY . .
-CMD exec npm start | pino-elasticsearch -i "api-service" --node "${ENV_ELK_URL}"
+CMD exec npm start | pino-elasticsearch -i "api-service" --node ${ENV_ELK_URL}
