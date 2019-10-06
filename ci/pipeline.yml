@@ -38,5 +38,6 @@ jobs:
       AZURE_USER: ((azure-user))
       AZURE_PASS: ((azure-pass))
       AZURE_RG: ((azure-rg))
+      CR_DOMAIN: ((cr-domain))
       AZURE_SS_NAME: Api0000SS
       SERVICE: api-service
