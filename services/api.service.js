@@ -54,8 +54,8 @@ module.exports = {
           'POST clients(.*)': 'clients.HandleRequest',
           'POST jobs/GetJobStatus': 'clients.HandleRequest',
           'POST users(.*)': 'users.HandleRequest',
-          'POST data/(.*)': 'users.HandleDataRequest',
-          'POST payment/(.*)': 'users.HandlePaymentRequest',
+          'POST data/(.*)': 'users.HandleProductRequest',
+          'POST payment/(.*)': 'users.HandleProductRequest',
         },
         bodyParsers: {
           json: { strict: false },

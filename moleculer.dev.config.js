@@ -16,7 +16,7 @@ module.exports = {
       {
         type: "Prometheus",
         options: {
-          port: 3030,
+          port: 3031,
           path: "/metrics",
           defaultLabels: registry => ({
             namespace: registry.broker.namespace,
