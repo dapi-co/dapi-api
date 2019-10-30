@@ -1,5 +1,5 @@
 const APIGateway = require('moleculer-web')
- 
+
 const https = process.env.NODE_ENV === 'production' ? {} : {}
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
         res.setHeader('Content-type', 'application/json; charset=utf-8')
 
       //Moleculer errors
-      if (typeof (err.message) === 'string') {
+      if (typeof err.message === 'string') {
         res.statusCode = err.code || 500
 
         switch (err.code) {
@@ -20,15 +20,15 @@ module.exports = {
               err.message = 'Endpoint not found'
               err.data = { success: false }
             }
-            break;
+            break
 
           case 422:
             err.data = {
               success: false,
               field: err.data[0].field,
-              err: err.data[0].message
+              err: err.data[0].message,
             }
-            break;
+            break
         }
         res.end(JSON.stringify({ msg: err.message, ...err.data }, null, 2))
         //Promise.reject
@@ -95,7 +95,8 @@ module.exports = {
       if (token && token.startsWith('Bearer')) token = token.slice(7)
 
       req.$params.jwt = token
-      req.$params.remoteAddress = req.headers['x-real-ip'] || req.connection.remoteAddress
+      req.$params.remoteAddress =
+        req.headers['x-real-ip'] || req.connection.remoteAddress
       req.$params.endpoint = req.parsedUrl.split('/')[3]
       return Promise.resolve('Authorized')
     },
