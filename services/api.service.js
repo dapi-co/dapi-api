@@ -52,7 +52,7 @@ module.exports = {
           'GET config/GetAllBanks': 'config.GetAllBanks',
           'POST auth(.*)': 'auth.HandleRequest',
           'POST clients(.*)': 'clients.HandleRequest',
-          'POST jobs/GetJobStatus': 'clients.HandleRequest',
+          'POST status': 'jobs.GetJobStatus',
           'POST users(.*)': 'users.HandleRequest',
           'POST data/(.*)': 'users.HandleProductRequest',
           'POST payment/(.*)': 'users.HandleProductRequest',
