@@ -8,10 +8,8 @@ module.exports = {
         res.setHeader('Content-type', 'application/json; charset=utf-8')
 
       let public = null
-      if (err.data) {
+      if (err.data)
         public = err.data.public
-        err.data.public = undefined
-      }
 
       err.code = err.code || 500
       this.logger.error(err)
