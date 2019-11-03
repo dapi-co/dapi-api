@@ -1,7 +1,4 @@
 const APIGateway = require('moleculer-web')
-
-const https = process.env.NODE_ENV === 'production' ? {} : {}
-
 module.exports = {
   name: 'api-secure',
   mixins: [APIGateway],
@@ -45,15 +42,18 @@ module.exports = {
     },
     routes: [
       {
+        mappingPolicy: 'restrict',
         path: '/v1',
         aliases: {
           'GET ': 'api-secure.Root',
           'GET /': 'api-secure.Root',
           'GET config/GetAllBanks': 'config.GetAllBanks',
-          'POST auth(.*)': 'auth.HandleRequest',
-          'POST clients(.*)': 'clients.HandleRequest',
+          'POST auth/ExchangeToken': 'auth.HandleRequest',
+          'POST auth/UserLogin': 'auth.HandleRequest',
+          'POST auth/ClientLogin': 'auth.HandleRequest',
+          'POST clients/(.*)': 'clients.HandleRequest',
           'POST status': 'jobs.GetJobStatus',
-          'POST users(.*)': 'users.HandleRequest',
+          'POST users/(.*)': 'users.HandleRequest',
           'POST data/(.*)': 'users.HandleProductRequest',
           'POST payment/(.*)': 'users.HandleProductRequest',
         },
@@ -95,7 +95,8 @@ module.exports = {
       if (token && token.startsWith('Bearer')) token = token.slice(7)
 
       req.$params.jwt = token
-      req.$params.remoteAddress = req.headers['x-real-ip'] || req.connection.remoteAddress
+      req.$params.remoteAddress =
+        req.headers['x-real-ip'] || req.connection.remoteAddress
 
       const split = req.parsedUrl.split('/')
       req.$params.product = split[2]
