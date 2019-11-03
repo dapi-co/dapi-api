@@ -1,4 +1,6 @@
 const APIGateway = require('moleculer-web')
+const jwt = require('jsonwebtoken')
+
 module.exports = {
   name: 'api-secure',
   mixins: [APIGateway],
@@ -90,7 +92,14 @@ module.exports = {
       const split = req.parsedUrl.split('/')
       req.$params.product = split[2]
       req.$params.endpoint = split[3]
-      return Promise.resolve('Authorized')
+
+      this.logger.info({
+        appKey: req.$params.appKey || (token ? jwt.decode(token).appKey : null),
+        product: req.$params.product,
+        subproduct: req.$params.endpoint
+      })
+
+      return Promise.resolve()
     },
   },
 }
