@@ -7,34 +7,24 @@ module.exports = {
       if (!res.headersSent)
         res.setHeader('Content-type', 'application/json; charset=utf-8')
 
-      //Moleculer errors
-      if (typeof err.message === 'string') {
-        res.statusCode = err.code || 500
-
-        switch (err.code) {
-          case 404:
-            if (!err.data) {
-              err.message = 'Endpoint not found'
-              err.data = { success: false }
-            }
-            break
-
-          case 422:
-            err.data = {
-              success: false,
-              field: err.data[0].field,
-              err: err.data[0].message,
-            }
-            break
-        }
-        res.end(JSON.stringify({ msg: err.message, ...err.data }, null, 2))
-        //Promise.reject
-      } else {
-        res.statusCode = err.message.code || 500
-        delete err.message.code
-        res.end(JSON.stringify(err.message, null, 2))
+      let public = null
+      if (err.data) {
+        public = err.data.public
+        err.data.public = undefined
       }
+
+      err.code = err.code || 500
+      this.logger.error(err)
+
+      res.statusCode = err.code
+      res.end(JSON.stringify({
+        success: false,
+        msg: err.message,
+        ...public
+        // errType: err.type
+      }));
     },
+
     port: process.env.HTTPS_PORT || 443,
     cors: {
       origin: '*',
