@@ -10,7 +10,14 @@ module.exports = {
       if (!res.headersSent)
         res.setHeader('Content-type', 'application/json; charset=utf-8')
 
-      res.statusCode = err.code || 500
+      if (!err.code)
+        err.code = 500
+
+      //TODO: broker.call throws are logged automatically, so this might cause duplicate logs.
+      //Will need to find a way to know if an error was already logged or not
+      this.logger.error(err)
+
+      res.statusCode = err.code
       res.end(JSON.stringify({
         success: false,
         msg: err.message,
