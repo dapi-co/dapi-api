@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "entry point",
   "scripts": {
-    "dev": "moleculer-runner --repl --hot --config moleculer.dev.config.js --envfile ./.env.dev services",
+    "dev": "node --inspect=0.0.0.0:9696 node_modules/moleculer/bin/moleculer-runner --repl --hot --config moleculer.dev.config.js --envfile ./.env.dev services",
     "start": "moleculer-runner --envfile ./.env services"
   },
   "repository": {

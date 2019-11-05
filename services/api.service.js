@@ -6,23 +6,17 @@ module.exports = {
   mixins: [APIGateway],
   settings: {
     onError(req, res, err) {
+
       if (!res.headersSent)
         res.setHeader('Content-type', 'application/json; charset=utf-8')
 
-      let public = null
-      if (err.data)
-        public = err.data.public
-
-      err.code = err.code || 500
-      this.logger.error(err)
-
-      res.statusCode = err.code
+      res.statusCode = err.code || 500
       res.end(JSON.stringify({
         success: false,
         msg: err.message,
-        ...public
-        // errType: err.type
-      }));
+        type: err.type || undefined,
+        ...(err.data ? err.data.external : null)
+      }))
     },
 
     port: process.env.HTTPS_PORT || 443,
@@ -42,6 +36,7 @@ module.exports = {
           'POST auth/UserLogin': 'auth.HandleRequest',
           'POST auth/ExchangeToken': 'auth.HandleRequest',
           'POST auth/ClientLogin': 'auth.HandleRequest',
+          'POST auth/Test': 'auth.Test',
           'POST clients/(.*)': 'clients.HandleRequest',
           'POST status': 'jobs.GetJobStatus',
           'POST users/(.*)': 'users.HandleRequest',
