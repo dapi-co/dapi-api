@@ -95,8 +95,16 @@ module.exports = {
       req.$params.product = split[2]
       req.$params.endpoint = split[3]
 
+      //Get appKey if exists, but also handle case where jwt is invalid
+      let appKey = req.$params.appKey
+      if (!appKey && token) {
+        appKey = jwt.decode(token)
+        if (appKey)
+          appKey = appKey.appKey
+      }
+
       this.logger.info({
-        appKey: req.$params.appKey || (token ? jwt.decode(token).appKey : null),
+        appKey: appKey,
         product: req.$params.product,
         subproduct: req.$params.endpoint
       })
