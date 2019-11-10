@@ -46,7 +46,6 @@ module.exports = {
           'POST auth/Test': 'auth.Test',
           'POST clients/(.*)': 'clients.HandleRequest',
           'POST status': 'jobs.GetJobStatus',
-          'POST users/(.*)': 'users.HandleRequest',
           'POST data/(.*)': 'users.HandleProductRequest',
           'POST payment/(.*)': 'users.HandleProductRequest',
         },
