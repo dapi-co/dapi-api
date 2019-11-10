@@ -84,7 +84,7 @@ module.exports = {
 
   methods: {
     async authorize(ctx, route, req, res) {
-      let token = req.headers['authorization']
+      let token = req.headers['authorization'] || req.headers['Authorization']
       if (token && token.startsWith('Bearer')) token = token.slice(7)
 
       req.$params.jwt = token
