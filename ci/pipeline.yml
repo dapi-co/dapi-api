@@ -2,8 +2,8 @@ resources:
 - name: api
   type: git
   source: 
-    uri: "git@github.com:dapi-co/api.git"
-    branch: master
+    uri: "git@github.com:dapi-co/api-service.git"
+    branch: prod
     private_key: ((priv-key))
 
 - name: api-docker-image
