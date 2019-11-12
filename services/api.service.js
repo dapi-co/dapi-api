@@ -15,7 +15,7 @@ module.exports = {
 
       //TODO: broker.call throws are logged automatically, so this might cause duplicate logs.
       //Will need to find a way to know if an error was already logged or not
-      this.logger.error(err)
+      this.logger.error(JSON.stringify(err))
 
       res.statusCode = err.code
       res.end(JSON.stringify({
@@ -46,7 +46,7 @@ module.exports = {
           'POST clients/(.*)': 'clients.HandleRequest',
           'POST status': 'jobs.GetJobStatus',
           'POST data/(.*)': 'users.HandleProductRequest',
-          'POST payment/(.*)': 'users.HandleProductRequest',
+          'POST payment/(.*)': 'users.HandleProductRequest'
         },
         bodyParsers: {
           json: { strict: false },
