@@ -1,0 +1,1346 @@
+{
+	"info": {
+		"_postman_id": "e88332a9-1107-4280-86a6-d715517bbd5e",
+		"name": "dapi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "ExchangeToken",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"accessCode\": \"{{access_code}}\",\n\t\"connectionID\": \"{{connection_id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.dapi.co/v1/auth/ExchangeToken",
+							"protocol": "https",
+							"host": [
+								"api",
+								"dapi",
+								"co"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"ExchangeToken"
+							]
+						},
+						"description": "Exchanges accessCode to accessToken\n```js\n{\n\t\"appSecret\": String,\n\t\"accessCode\": String,\n\t\"connectionID\": String\n}\n```"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"accessCode\": \"{{access_code}}\",\n\t\"connectionID\": \"{{connection_id}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}/v1/auth/ExchangeToken",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"auth",
+										"ExchangeToken"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 11 Nov 2019 15:34:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "334"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzYWx0IjoicUhSOWh1aWViUDQrK0xucUo1ZkEramVrVGtIQXZpWWZqcVViWUZlMWd2OD0iLCJhcHBLZXkiOiI1NzYwMDM3MjQ0MzE3N2MwMTI5ZDUwZDc5OGFjODNmNGJhMzM1MmNhYWQxMzE4ZmI5MGYzMmM0NDg2NTk1YWQ4IiwiaWF0IjoxNTczNDg2NDc4LCJleHAiOjE1NzYwNzg0Nzh9.YrrV5j8ZwWSZnHCGNER-0Np0wl-K1JSHuBIWGQmvxgk\"\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": []
+		},
+		{
+			"name": "Data",
+			"item": [
+				{
+					"name": "Identity",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"userSecret\": \"{{user_secret}}\",\n\t\"sync\": true,\n\t\"addresses\":[]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.dapi.co/v1/data/Identity",
+							"protocol": "https",
+							"host": [
+								"api",
+								"dapi",
+								"co"
+							],
+							"path": [
+								"v1",
+								"data",
+								"Identity"
+							]
+						},
+						"description": "Get User Identity\n```js\n{\n\t\"appSecret\": String,\n\t\"userSecret\": String,\n\t\"sync\": Boolean\n}\n```\n\njwt\n```\nAuth header: Bearer <accessToken>\n```"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"accessCode\": \"{{access_code}}\",\n\t\"connectionID\": \"{{connection_id}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}/v1/auth/ExchangeToken",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"auth",
+										"ExchangeToken"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 11 Nov 2019 15:34:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "334"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzYWx0IjoicUhSOWh1aWViUDQrK0xucUo1ZkEramVrVGtIQXZpWWZqcVViWUZlMWd2OD0iLCJhcHBLZXkiOiI1NzYwMDM3MjQ0MzE3N2MwMTI5ZDUwZDc5OGFjODNmNGJhMzM1MmNhYWQxMzE4ZmI5MGYzMmM0NDg2NTk1YWQ4IiwiaWF0IjoxNTczNDg2NDc4LCJleHAiOjE1NzYwNzg0Nzh9.YrrV5j8ZwWSZnHCGNER-0Np0wl-K1JSHuBIWGQmvxgk\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Accounts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"userSecret\": \"{{user_secret}}\",\n\t\"sync\": true,\n\t\"addresses\":[]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.dapi.co/v1/data/UserAccounts",
+							"protocol": "https",
+							"host": [
+								"api",
+								"dapi",
+								"co"
+							],
+							"path": [
+								"v1",
+								"data",
+								"UserAccounts"
+							]
+						},
+						"description": "Get User Accounts\n```js\n{\n\t\"appSecret\": String,\n\t\"userSecret\": String,\n\t\"sync\": Boolean\n}\n```\n\njwt\n```\nAuth header: Bearer <accessToken>\n```"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"accessCode\": \"{{access_code}}\",\n\t\"connectionID\": \"{{connection_id}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}/v1/auth/ExchangeToken",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"auth",
+										"ExchangeToken"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 11 Nov 2019 15:34:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "334"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzYWx0IjoicUhSOWh1aWViUDQrK0xucUo1ZkEramVrVGtIQXZpWWZqcVViWUZlMWd2OD0iLCJhcHBLZXkiOiI1NzYwMDM3MjQ0MzE3N2MwMTI5ZDUwZDc5OGFjODNmNGJhMzM1MmNhYWQxMzE4ZmI5MGYzMmM0NDg2NTk1YWQ4IiwiaWF0IjoxNTczNDg2NDc4LCJleHAiOjE1NzYwNzg0Nzh9.YrrV5j8ZwWSZnHCGNER-0Np0wl-K1JSHuBIWGQmvxgk\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Balance",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"userSecret\": \"{{user_secret}}\",\n\t\"sync\": true,\n\t\"addresses\":[],\n\t\"accountID\": \"JRLLZ61yD60bACpJwMrQDUABKwtVH2nNs705L/kjiGk29aFpjyLqInaTZg4FG6BytYoToEyJqjbcFgOQq44m4g==\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.dapi.co/v1/data/AccountBalance",
+							"protocol": "https",
+							"host": [
+								"api",
+								"dapi",
+								"co"
+							],
+							"path": [
+								"v1",
+								"data",
+								"AccountBalance"
+							]
+						},
+						"description": "Get User Balance\n```js\n{\n\t\"appSecret\": String,\n\t\"userSecret\": String,\n\t\"sync\": Boolean,\n\t\"iban\": String\n}\n```\n\njwt\n```\nAuth header: Bearer <accessToken>\n```"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"accessCode\": \"{{access_code}}\",\n\t\"connectionID\": \"{{connection_id}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}/v1/auth/ExchangeToken",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"auth",
+										"ExchangeToken"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 11 Nov 2019 15:34:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "334"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzYWx0IjoicUhSOWh1aWViUDQrK0xucUo1ZkEramVrVGtIQXZpWWZqcVViWUZlMWd2OD0iLCJhcHBLZXkiOiI1NzYwMDM3MjQ0MzE3N2MwMTI5ZDUwZDc5OGFjODNmNGJhMzM1MmNhYWQxMzE4ZmI5MGYzMmM0NDg2NTk1YWQ4IiwiaWF0IjoxNTczNDg2NDc4LCJleHAiOjE1NzYwNzg0Nzh9.YrrV5j8ZwWSZnHCGNER-0Np0wl-K1JSHuBIWGQmvxgk\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Transactions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"userSecret\": \"{{user_secret}}\",\n\t\"sync\": true,\n\t\"addresses\":[],\n\t\"accountID\": \"JRLLZ61yD60bACpJwMrQDUABKwtVH2nNs705L/kjiGk29aFpjyLqInaTZg4FG6BytYoToEyJqjbcFgOQq44m4g==\",\n\t\"fromDate\": \"2019-10-01\",\n\t\"toDate\": \"2019-10-10\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.dapi.co/v1/data/Transactions",
+							"protocol": "https",
+							"host": [
+								"api",
+								"dapi",
+								"co"
+							],
+							"path": [
+								"v1",
+								"data",
+								"Transactions"
+							]
+						},
+						"description": "Get Transactions\n```js\n{\n\t\"appSecret\": String,\n\t\"userSecret\": String,\n\t\"sync\": Boolean,\n\t\"iban\": String,\n\t\"toDate\": String,\n\t\"fromDate\": String\n}\n```\n\njwt\n```\nAuth header: Bearer <accessToken>\n```"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"accessCode\": \"{{access_code}}\",\n\t\"connectionID\": \"{{connection_id}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}/v1/auth/ExchangeToken",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"auth",
+										"ExchangeToken"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 11 Nov 2019 15:34:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "334"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzYWx0IjoicUhSOWh1aWViUDQrK0xucUo1ZkEramVrVGtIQXZpWWZqcVViWUZlMWd2OD0iLCJhcHBLZXkiOiI1NzYwMDM3MjQ0MzE3N2MwMTI5ZDUwZDc5OGFjODNmNGJhMzM1MmNhYWQxMzE4ZmI5MGYzMmM0NDg2NTk1YWQ4IiwiaWF0IjoxNTczNDg2NDc4LCJleHAiOjE1NzYwNzg0Nzh9.YrrV5j8ZwWSZnHCGNER-0Np0wl-K1JSHuBIWGQmvxgk\"\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": []
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "GetBeneficiaries",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"userSecret\": \"{{user_secret}}\",\n\t\"sync\": true,\n\t\"type\": \"same\",\n\t\"addresses\":[]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.dapi.co/v1/payment/GetBeneficiaries",
+							"protocol": "https",
+							"host": [
+								"api",
+								"dapi",
+								"co"
+							],
+							"path": [
+								"v1",
+								"payment",
+								"GetBeneficiaries"
+							]
+						},
+						"description": "Get Beneficiaries\n```js\n{\n\t\"appSecret\": String,\n\t\"userSecret\": String,\n\t\"sync\": Boolean,\n\t\"type\": String\n}\n```\n\njwt\n```\nAuth header: Bearer <accessToken>\n```"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"accessCode\": \"{{access_code}}\",\n\t\"connectionID\": \"{{connection_id}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}/v1/auth/ExchangeToken",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"auth",
+										"ExchangeToken"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 11 Nov 2019 15:34:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "334"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzYWx0IjoicUhSOWh1aWViUDQrK0xucUo1ZkEramVrVGtIQXZpWWZqcVViWUZlMWd2OD0iLCJhcHBLZXkiOiI1NzYwMDM3MjQ0MzE3N2MwMTI5ZDUwZDc5OGFjODNmNGJhMzM1MmNhYWQxMzE4ZmI5MGYzMmM0NDg2NTk1YWQ4IiwiaWF0IjoxNTczNDg2NDc4LCJleHAiOjE1NzYwNzg0Nzh9.YrrV5j8ZwWSZnHCGNER-0Np0wl-K1JSHuBIWGQmvxgk\"\n}"
+						}
+					]
+				},
+				{
+					"name": "AddBeneficiary",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"userSecret\": \"{{user_secret}}\",\n\t\"sync\": true,\n\t\"addresses\":[],\n\t\"type\": \"same\",\n\t\"swiftCode\": \"DAPIBANK\",\n\t\"name\": \"fat7i51\",\n\t\"beneficiaryAccountNumber\": \"12345678765432345614432\",\n\t\"bankName\": \"Potatoland\"\n}\t",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.dapi.co/v1/payment/AddBeneficiary",
+							"protocol": "https",
+							"host": [
+								"api",
+								"dapi",
+								"co"
+							],
+							"path": [
+								"v1",
+								"payment",
+								"AddBeneficiary"
+							]
+						},
+						"description": "```js\n{\n\t\"appSecret\": String,\n\t\"userSecret\": String,\n\t\"sync\": Boolean,\n\t\"type\": String,\n\t\"swiftCode\": String,\n\t\"name\": String,\n\t\"beneficiaryAccountNumber\": String,\n\t\"bankName\": String,\n\t\"otp\": String\n}\n```\n\njwt\n```\nAuth header: Bearer <accessToken>\n```"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"userSecret\": \"{{user_secret}}\",\n\t\"sync\": true,\n\t\"type\": \"same\",\n\t\"swiftCode\": \"DAPIBANK\",\n\t\"name\": \"fat7i\",\n\t\"beneficiaryAccountNumber\": \"1234567876543234567\",\n\t\"bankName\": \"Potatoland\",\n\t\"otp\": \"123456\"\n}\t",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}/v1/payment/AddBeneficiary",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"payment",
+										"AddBeneficiary"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 12 Nov 2019 07:01:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "296"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"jobID\": \"def28daf-ec75-48cd-8a99-365da0023f0a\",\n    \"success\": true,\n    \"msg\": \"Job Finished\",\n    \"result\": {\n        \"beneficiaries\": [\n            {\n                \"name\": \"Aziz Ahmad\",\n                \"iban\": \"FTQ72AEDB20201555555893\",\n                \"accountNumber\": \"0201555555893\"\n            },\n            {\n                \"name\": \"fat7i\",\n                \"iban\": \"1234567876543234567\",\n                \"accountNumber\": \"1234567876543234567\"\n            }\n        ]\n    },\n    \"done\": true\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"accessCode\": \"{{access_code}}\",\n\t\"connectionID\": \"{{connection_id}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}/v1/auth/ExchangeToken",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"auth",
+										"ExchangeToken"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 11 Nov 2019 15:34:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "334"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzYWx0IjoicUhSOWh1aWViUDQrK0xucUo1ZkEramVrVGtIQXZpWWZqcVViWUZlMWd2OD0iLCJhcHBLZXkiOiI1NzYwMDM3MjQ0MzE3N2MwMTI5ZDUwZDc5OGFjODNmNGJhMzM1MmNhYWQxMzE4ZmI5MGYzMmM0NDg2NTk1YWQ4IiwiaWF0IjoxNTczNDg2NDc4LCJleHAiOjE1NzYwNzg0Nzh9.YrrV5j8ZwWSZnHCGNER-0Np0wl-K1JSHuBIWGQmvxgk\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Resume Add Beneficiary",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"userSecret\": \"{{user_secret}}\",\n\t\"sync\": true,\n\t\"addresses\":[],\n\t\"jobID\": \"110c747f-346e-41af-9c52-a08fc2999aad\",\n\t\"otp\": \"123456\"\n}\t",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.dapi.co/v1/payment/AddBeneficiary",
+							"protocol": "https",
+							"host": [
+								"api",
+								"dapi",
+								"co"
+							],
+							"path": [
+								"v1",
+								"payment",
+								"AddBeneficiary"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Start Payment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"userSecret\": \"{{user_secret}}\",\n\t\"sync\": true,\n\t\"addresses\":[],\n\t\"amount\": 1,\n\t\"type\": \"same\",\n\t\"senderID\": \"JRLLZ61yD60bACpJwMrQDUABKwtVH2nNs705L/kjiGk29aFpjyLqInaTZg4FG6BytYoToEyJqjbcFgOQq44m4g==\",\n\t\"receiverID\": \"FYvMqo0sQhBK8K7S2nmariYVKXinaX7hFY+OaI31TJVprMGs/FP3KkXGwUYBLNwHLmeUdgqoOE3gz5ak+opvSg==\"\n}\t",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.dapi.co/v1/payment/Payment",
+							"protocol": "https",
+							"host": [
+								"api",
+								"dapi",
+								"co"
+							],
+							"path": [
+								"v1",
+								"payment",
+								"Payment"
+							]
+						},
+						"description": "```js\n{\n\t\"appSecret\": String,\n\t\"userSecret\": String,\n\t\"sync\": Boolean,\n\t\"type\": String,\n\t\"swiftCode\": String,\n\t\"name\": String,\n\t\"beneficiaryAccountNumber\": String,\n\t\"bankName\": String,\n\t\"otp\": String\n}\n```\n\njwt\n```\nAuth header: Bearer <accessToken>\n```"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"accessCode\": \"{{access_code}}\",\n\t\"connectionID\": \"{{connection_id}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}/v1/auth/ExchangeToken",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"auth",
+										"ExchangeToken"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 11 Nov 2019 15:34:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "334"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzYWx0IjoicUhSOWh1aWViUDQrK0xucUo1ZkEramVrVGtIQXZpWWZqcVViWUZlMWd2OD0iLCJhcHBLZXkiOiI1NzYwMDM3MjQ0MzE3N2MwMTI5ZDUwZDc5OGFjODNmNGJhMzM1MmNhYWQxMzE4ZmI5MGYzMmM0NDg2NTk1YWQ4IiwiaWF0IjoxNTczNDg2NDc4LCJleHAiOjE1NzYwNzg0Nzh9.YrrV5j8ZwWSZnHCGNER-0Np0wl-K1JSHuBIWGQmvxgk\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"userSecret\": \"{{user_secret}}\",\n\t\"sync\": true,\n\t\"type\": \"same\",\n\t\"swiftCode\": \"DAPIBANK\",\n\t\"name\": \"fat7i\",\n\t\"beneficiaryAccountNumber\": \"1234567876543234567\",\n\t\"bankName\": \"Potatoland\",\n\t\"otp\": \"123456\"\n}\t",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}/v1/payment/AddBeneficiary",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"payment",
+										"AddBeneficiary"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 12 Nov 2019 07:01:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "296"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"jobID\": \"def28daf-ec75-48cd-8a99-365da0023f0a\",\n    \"success\": true,\n    \"msg\": \"Job Finished\",\n    \"result\": {\n        \"beneficiaries\": [\n            {\n                \"name\": \"Aziz Ahmad\",\n                \"iban\": \"FTQ72AEDB20201555555893\",\n                \"accountNumber\": \"0201555555893\"\n            },\n            {\n                \"name\": \"fat7i\",\n                \"iban\": \"1234567876543234567\",\n                \"accountNumber\": \"1234567876543234567\"\n            }\n        ]\n    },\n    \"done\": true\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"userSecret\": \"{{user_secret}}\",\n\t\"sync\": true,\n\t\"amount\": 1,\n\t\"type\": \"same\",\n\t\"source\": \"GB33BAEDB20201555555893\",\n\t\"beneficiaryAccountNumber\": \"FTQ72AEDB20201555555893\"\n}\t",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}/v1/payment/Payment",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"payment",
+										"Payment"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 12 Nov 2019 07:10:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "147"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"jobID\": \"74d59740-e9ed-4f55-be24-2c037615a701\",\n    \"success\": true,\n    \"msg\": \"Job Initialized\",\n    \"result\": {\n        \"success\": true,\n        \"msg\": \"OTP required\"\n    },\n    \"done\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "Resume Payment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"userSecret\": \"{{user_secret}}\",\n\t\"sync\": true,\n\t\"addresses\":[],\n\t\"jobID\": \"e1954d0d-c9d4-4175-91a2-ebc482ebd6dd\",\n\t\"otp\": \"123456\"\n}\t",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.dapi.co/v1/payment/Payment",
+							"protocol": "https",
+							"host": [
+								"api",
+								"dapi",
+								"co"
+							],
+							"path": [
+								"v1",
+								"payment",
+								"Payment"
+							]
+						},
+						"description": "```js\n{\n\t\"appSecret\": String,\n\t\"userSecret\": String,\n\t\"sync\": Boolean,\n\t\"jobID\": String,\n\t\"otp\": String\n}\n```\n\njwt\n```\nAuth header: Bearer <accessToken>\n```"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"userSecret\": \"{{user_secret}}\",\n\t\"sync\": true,\n\t\"jobID\": \"ee563c34-3906-4ab5-aa81-8253a9c4af5b\",\n\t\"otp\": \"123456\"\n}\t",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}/v1/payment/Payment",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"payment",
+										"Payment"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 12 Nov 2019 07:17:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "164"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"jobID\": \"ee563c34-3906-4ab5-aa81-8253a9c4af5b\",\n    \"success\": true,\n    \"msg\": \"Job Finished\",\n    \"result\": {\n        \"success\": true,\n        \"msg\": \"Payment is initiated successfully\"\n    },\n    \"done\": true\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": []
+		},
+		{
+			"name": "Status",
+			"item": [
+				{
+					"name": "Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"userSecret\": \"{{user_secret}}\",\n\t\"jobID\": \"e1954d0d-c9d4-4175-91a2-ebc482ebd6dd\",\n\t\"appKey\": \"{{app_key}}\"\n}\t",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.dapi.co/v1/status",
+							"protocol": "https",
+							"host": [
+								"api",
+								"dapi",
+								"co"
+							],
+							"path": [
+								"v1",
+								"status"
+							]
+						},
+						"description": "```js\n{\n\t\"appSecret\": String,\n\t\"userSecret\": String,\n\t\"sync\": Boolean,\n\t\"type\": String,\n\t\"swiftCode\": String,\n\t\"name\": String,\n\t\"beneficiaryAccountNumber\": String,\n\t\"bankName\": String,\n\t\"otp\": String\n}\n```\n\njwt\n```\nAuth header: Bearer <accessToken>\n```"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"appSecret\": \"{{app_secret}}\",\n\t\"userSecret\": \"{{user_secret}}\",\n\t\"jobID\": \"97bd02d3-6f0c-40a5-a42e-31cd704e9ff9\",\n\t\"appKey\": \"{{app_key}}\"\n}\t",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}/v1/status",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"v1",
+										"status"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 12 Nov 2019 07:14:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "192"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"Status\": \"Finished\",\n    \"Result\": {\n        \"success\": true,\n        \"msg\": \"Account balance retrieved successfully\",\n        \"accountBalance\": {\n            \"balance\": 2009,\n            \"currency\": \"AED\",\n            \"accountNumber\": \"0201555555893\"\n        }\n    }\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "4fde5775-2f2c-434e-9af2-17609fcc84f9",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "fd9546b0-19a2-4184-8a2f-f2319c8be99f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": []
+}

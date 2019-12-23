@@ -1,0 +1,39 @@
+{
+	"id": "53420cd2-ed92-4dd6-96dc-814ca79e8db5",
+	"name": "prod",
+	"values": [
+		{
+			"key": "app_key",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "app_secret",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "access_code",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "user_secret",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "connection_id",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "access_token",
+			"value": "",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2019-12-22T07:46:36.919Z",
+	"_postman_exported_using": "Postman/7.14.0"
+}
